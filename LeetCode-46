@@ -1,0 +1,33 @@
+/*
+全排列 回溯算法
+Permutations
+Given a collection of distinct integers, return all possible permutations.
+backtrack
+*/
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) 
+    {
+        int i;    
+        vector<vector<int>> p;
+
+        backtrack(0, p, nums);
+        return p;
+    }
+    void backtrack(int first, vector<vector<int>> &p, vector<int> &nums)
+    {
+        int i, len = nums.size();
+        if(first == len - 1)
+        {
+            p.push_back(nums);
+            return;
+        }
+        for(i = first; i < len; ++i)
+        {
+            swap(nums[i], nums[first]);
+            backtrack(first + 1, p, nums);
+            swap(nums[i], nums[first]);
+        }
+
+    }
+};
