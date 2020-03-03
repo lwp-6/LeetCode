@@ -1,0 +1,54 @@
+/*
+Sunday algorithm(c++)
+Implement strStr()
+字符串匹配Sunday算法
+*/
+class Solution {
+public:
+    int strStr(string haystack, string needle) 
+    {
+        int i = 0, j = 0, k, next;
+	    int ln = needle.length(), lh = haystack.length(), m;
+        next = 0;
+        if(ln == 0)
+        {
+            return 0;
+        }
+	    if (lh == 0)
+	    {
+		    return -1;
+	    }
+	    while (i < lh)
+	    {
+		    if (haystack[i] != needle[j])
+		    {
+                
+			    next = next + ln;
+                if(next > lh)
+                {
+                    return -1;
+                }
+                for(k = ln - 1; k >= 0; --k)
+                {
+                    if(needle[k] == haystack[next])
+                    {
+                        break;
+                    }
+                }
+                j = 0;
+                i = next - k;
+                next = i;
+		    }
+		    else
+		    {
+			    if (j == ln - 1)
+			    {
+				    return i - j;
+			    }
+			    i++;
+			    j++;
+		    }
+	    }
+	    return -1;
+    }
+};
