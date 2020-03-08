@@ -1,0 +1,67 @@
+/*
+Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent.
+backtrack
+*/
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        vector<string> v;
+        if(digits.length() == 0)
+        {
+            return v;
+        }
+        backtrack(v, "", digits);
+        return v;
+    }
+    void backtrack(vector<string> &v, string s, string digits)
+    {
+        if(digits.length() == 0)
+        {
+            v.push_back(s);
+            return; 
+        }
+        string curstring;
+        char curdig = digits[0];
+        if(curdig == '2')
+        {
+            curstring = "abc";
+        }
+        else if(curdig == '3')
+        {
+            curstring = "def";
+        }
+        else if(curdig == '4')
+        {
+            curstring = "ghi";
+        }
+        else if(curdig == '5')
+        {
+            curstring = "jkl";
+        }
+        else if(curdig == '6')
+        {
+            curstring = "mno";
+        }
+        else if(curdig == '7')
+        {
+            curstring = "pqrs";
+        }
+        else if(curdig == '8')
+        {
+            curstring = "tuv";
+        }
+        else if(curdig == '9')
+        {
+            curstring = "wxyz";
+        }
+        int i;
+        string d;
+        d = digits.substr(1);
+        for(i = 0; i < curstring.length(); ++i)
+        {
+            s += curstring[i];
+            backtrack(v, s, d);
+            s = s.substr(0, s.length() - 1);
+        }
+    }
+};
