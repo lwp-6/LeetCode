@@ -1,0 +1,66 @@
+/*
+找出数组nums中出现频率最高的k个元素
+哈希表+大顶堆 
+*/
+class Solution {
+public:
+    map<int, int> m;
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        int i, cur;
+        
+        vector<int> queue, v;
+        for(i = 0; i < nums.size(); ++i)
+        {
+            m[nums[i]]++;
+        }
+        sort(nums.begin(), nums.end());
+        nums.erase(unique(nums.begin(), nums.end()), nums.end());
+        for(i = 0; i < nums.size(); ++i)
+        {
+            queue.push_back(nums[i]);
+        }
+        cur = (nums.size()-2) / 2;
+        while(cur >= 0)
+        {
+            siftdown(queue, cur);
+            cur--;
+        }
+        
+        for (i = 0; i < k; ++i)
+        {
+            v.push_back(queue[0]);
+            queue[0] = queue[queue.size() - 1];
+            queue.pop_back();
+            siftdown(queue, 0);
+        }
+        return v;
+    }
+    void siftdown(vector<int>& queue, int pos)
+    {
+        int temp;
+
+        if ((2 * pos + 2) < queue.size() && (2 * pos + 1) < queue.size())
+        {
+            temp = max(max(m[queue[2 * pos + 2]], m[queue[2 * pos + 1]]), m[queue[pos]]);
+            if (temp == m[queue[2 * pos + 2]])
+            {
+                swap(queue[pos], queue[2 * pos + 2]);
+                siftdown(queue, 2 * pos + 2);         
+            }
+            else if (temp == m[queue[2 * pos + 1]])
+            {
+                swap(queue[pos], queue[2 * pos + 1]);
+                siftdown(queue, 2 * pos + 1);
+            }
+        }
+        else if ((2 * pos + 1) < queue.size())
+        {
+            if (m[queue[pos]] < m[queue[2 * pos + 1]])
+            {
+                swap(queue[pos], queue[2 * pos + 1]);
+                siftdown(queue, 2 * pos + 1);
+            }
+        }
+
+    }
+};
