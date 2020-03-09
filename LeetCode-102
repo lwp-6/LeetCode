@@ -1,0 +1,42 @@
+/*
+使用队列实现BFS，实现树的层次遍历
+*/
+class Solution {
+public:
+
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> v;
+        vector<TreeNode*> queue;
+        vector<int> temp;
+        TreeNode *p;
+        if(root == NULL)
+        {
+            return v;
+        }
+        int i, len;
+        
+        queue.push_back(root);
+        while(queue.size() != 0)
+        {
+            temp.clear();
+            len = queue.size();
+            for(i = 0; i < len; ++i)
+            {
+                if(queue[0]->left != NULL)
+                {
+                    queue.push_back(queue[0]->left);
+                }
+                if(queue[0]->right != NULL)
+                {
+                    queue.push_back(queue[0]->right);
+                }
+                temp.push_back(queue[0]->val);
+                queue.erase(queue.begin());
+            }
+            v.push_back(temp);
+
+        }
+        return v;
+    }
+
+};
