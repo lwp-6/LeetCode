@@ -1,5 +1,5 @@
 /*
-Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent.
+电话号码字母组合，2-9映射26个字母，给定数字，找出所有组合
 backtrack
 */
 class Solution {
