@@ -1,0 +1,25 @@
+/*
+将n*n矩阵顺时针旋转90度。
+先将矩阵转置，将列对称交换。
+*/
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int i, j, k;
+        
+        for(k = 1; k < matrix[0].size(); ++k)
+        {
+            for(i = 0, j = k; j < matrix[0].size(); ++j, ++i)
+            {
+                swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+        for(i = 0; i < matrix.size(); ++i)
+        {
+            for(j = 0, k = matrix.size() - 1; j < k; ++j, --k)
+            {
+                swap(matrix[i][j], matrix[i][k]);
+            }
+        }
+    }
+};
