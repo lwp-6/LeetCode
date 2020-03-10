@@ -1,0 +1,30 @@
+/*
+动态规划 
+dp[i] = max(dp[j]) && j < i && nums[j] < nums[i]
+dp[i]表示以nums[i]结尾的最长子序列长度
+*/
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int i, j, maxlen = 1, curmax;
+        vector<int> dp(nums.size(), 0);
+        if(nums.size() == 0)
+        {
+            return 0;
+        }
+        for(i = 0; i < nums.size(); ++i)
+        {
+            curmax = 0;
+            for(j = i - 1; j >= 0; --j)
+            {
+                if(nums[j] < nums[i])
+                {
+                    curmax = max(curmax, dp[j]);
+                }
+            }
+            dp[i] = curmax + 1;
+            maxlen = max(dp[i], maxlen);
+        }
+        return maxlen;
+    }
+};
