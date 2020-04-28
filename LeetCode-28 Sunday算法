@@ -8,7 +8,7 @@ public:
     int strStr(string haystack, string needle) 
     {
         int i = 0, j = 0, k, next;
-	    int ln = needle.length(), lh = haystack.length(), m;
+	int ln = needle.length(), lh = haystack.length(), m;
         next = 0;
         if(ln == 0)
         {
